@@ -3,16 +3,16 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [serverData, setServerData] = useState('');
+  const [serverData, setServerData] = useState([]);
 
   useEffect(() => {
     async function readServerData() {
-      const resp = await fetch('/api/hello');
+      const resp = await fetch('/api/todos');
       const data = await resp.json();
 
       console.log('Data from server:', data);
 
-      setServerData(data.message);
+      setServerData(data);
     }
 
     readServerData();
@@ -22,7 +22,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>{serverData}</h1>
+        {serverData.map((t) => (
+          <h1 key={t.todoId}>{t.task}</h1>
+        ))}
       </header>
     </div>
   );
