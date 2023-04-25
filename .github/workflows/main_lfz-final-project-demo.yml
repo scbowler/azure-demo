@@ -20,6 +20,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '18.x'
+      - name: Set up database
+        run: npm run db:import
 
       - name: npm install, build, and test
         run: |
